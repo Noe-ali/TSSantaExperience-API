@@ -29,3 +29,11 @@ export function validateUser(user: User) {
     throw new Error(result.error.toString());
   }
 }
+
+
+//base class
+export class UserModel{
+  static getAll(){
+    return users;
+  }
+}
