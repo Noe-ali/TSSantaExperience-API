@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 3000;
 app.disable('x-powered-by')
 
 //require routers
-import { usersRouter } from './routes/users';
+import  usersRouter  from './routes/users';
 
 app.get('/', (req, res) => {
     res.status(200).send(`listen on port ${PORT} `);

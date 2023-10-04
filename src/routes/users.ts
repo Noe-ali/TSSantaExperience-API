@@ -1,7 +1,11 @@
 import { Router } from 'express';
+import { UserModel } from '../models/user';
+const usersRouter = Router();
 
-const router = Router();
-
-router.get('/', (req, res) => {
-    res.status(200).send('Hello from users route');
+usersRouter.get('/', async (req, res) => {
+    const users = await UserModel.getAll();
+    res.json(users)
 })
+
+
+export default usersRouter;
