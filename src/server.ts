@@ -3,9 +3,11 @@ require('dotenv').config()
 
 const app = express();
 const PORT = process.env.PORT ?? 3000;
+app.disable('x-powered-by')
+
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.status(200).send(`listen on port ${PORT} `);
 });
 
 app.listen(PORT, () => {
