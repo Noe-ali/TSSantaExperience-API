@@ -33,7 +33,7 @@ export function validateUser(user: User) {
 
 //base class
 export class UserModel{
-  static getAll = async(){
+  static async getAll(){
     return true;
   }
 }
