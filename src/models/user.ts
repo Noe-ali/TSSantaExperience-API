@@ -1,39 +1,31 @@
-import * as z from "zod";
+import { User } from "../schemas/userSchema";
 
-export interface User {
-  id: number;
-  username: string;
-  password?: string;
-  phone_number?: string;
-}
-
-const userSchema = z.object({
-  id: z.number(),
-  username: z.string({
-    invalid_type_error: "Username must be a string",
-    required_error: "Username is required",
-  }),
-  password: z.string().optional(),
-  phone_number: z.string().optional(),
-});
-
-export function validatePartialUser(user: Partial<User>) {
-  return userSchema.partial().safeParse(user);
-}
-
-export function validateUser(user: User) {
-  const result = userSchema.safeParse(user);
-  if (result.success) {
-    return result.data;
-  } else {
-    throw new Error(result.error.toString());
-  }
-}
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'TSSexperience',
+  password: 'postgres',
+  port: 5432,
+})
 
 
-//base class
 export class UserModel{
+
   static async getAll(){
-    return true;
   }
+
+  // static async getById(id: number): User{
+  // }
+
+  // static async create({input}}){
+
+  // }
+
+  // static async delete({id}){
+
+  // }
+
+  // static async update({id, input}){
+  // }
 }
