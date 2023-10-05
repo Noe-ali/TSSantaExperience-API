@@ -8,6 +8,11 @@ app.disable('x-powered-by')
 //require routers
 import  usersRouter  from './routes/users';
 
+
+// Routers
+app.use('/users', usersRouter);
+
+
 app.get('/', (req, res) => {
     res.status(200).send(`listen on port ${PORT} `);
 });
@@ -17,5 +22,4 @@ app.listen(PORT, () => {
 });
 
 
-// Routers
-app.use('/users', usersRouter);
+

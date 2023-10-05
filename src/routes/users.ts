@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { UserModel } from '../models/user';
-const usersRouter = Router();
+import { UserController } from '../controllers/userController';
 
-usersRouter.get('/', async (req, res) => {
-    const users = await UserModel.getAll();
-    res.json(users)
-})
+export const usersRouter = Router();
 
+usersRouter.get('/', UserController.getAll);
+// usersRouter.get('/:id', UserController.getById))
+// usersRouter.post('/', UserController.create))
+// usersRouter.delete('/:id', UserController.delete))
+// usersRouter.put('/:id', UserController.update))
 
 export default usersRouter;
