@@ -8,7 +8,7 @@ export interface User {
 }
 
 const userSchema = z.object({
-  id: z.number(),
+  id: z.number().optional(),
   username: z.string({
     invalid_type_error: "Username must be a string",
     required_error: "Username is required",
