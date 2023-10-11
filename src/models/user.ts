@@ -1,31 +1,41 @@
 import { User } from "../schemas/userSchema";
 import { Pool, Client } from "pg";
 
-const pool = new Pool(
-  // {
-  //   user: "postgres",
-  //   host: "localhost",
-  //   database: "TSSexperience",
-  //   password: "postgres",
-  //   port: 5432,
-  // }
-);
+const pool = new Pool();
 
 export class UserModel {
-  static async getAll() {
+  async getAll(): Promise<User[]> {
     const getUsers = await pool.query(
-      "SELECT username, password, phone_number FROM users"
+      "SELECT user_id, username, password, phone_number FROM users"
     );
-    await pool.end();
     return getUsers.rows;
   }
 
-  // static async getById(id: number): User{
-  // }
+  async getById(id: string): Promise<User> {
+    const getUser = await pool.query(
+      "SELECT username, password, phone_number FROM users WHERE user_id = $1",
+      [id]
+    );
+    return getUser.rows[0];
+  }
 
-  // static async create({input}}){
-
-  // }
+  async create(request: User): Promise<User> {
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      const newUser = await client.query(
+        "INSERT INTO users (username, password, phone_number) VALUES ($1, $2, $3) RETURNING *",
+        [request.username, request.password, request.phone_number]
+      );
+      await client.query("COMMIT");
+      return newUser.rows[0];
+    } catch (e) {
+      await client.query("ROLLBACK");
+      throw e;
+    } finally {
+      client.release();
+    }
+  }
 
   // static async delete({id}){
 
