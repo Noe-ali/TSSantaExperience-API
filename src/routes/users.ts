@@ -1,12 +1,17 @@
-import { Router } from 'express';
-import { UserController } from '../controllers/userController';
+import { Router } from "express";
+import { UserController } from "../controllers/userController";
+import { UserModel } from "../models/user";
 
-export const usersRouter = Router();
+export const createUserRouter = (): Router => {
+  const usersRouter = Router();
+  const userController = new UserController(new UserModel());
 
-usersRouter.get('/', UserController.getAll);
-// usersRouter.get('/:id', UserController.getById))
-// usersRouter.post('/', UserController.create))
-// usersRouter.delete('/:id', UserController.delete))
-// usersRouter.put('/:id', UserController.update))
+  usersRouter.get("/", userController.getAll);
+  usersRouter.get("/:id", userController.getById);
+  usersRouter.post("/", userController.create);
+  usersRouter.delete('/:id', UserController.delete))
+  usersRouter.put('/:id', UserController.update))
 
-export default usersRouter;
+  return usersRouter;
+};
+export default createUserRouter;
