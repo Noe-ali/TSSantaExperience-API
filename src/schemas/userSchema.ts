@@ -22,10 +22,5 @@ export function validatePartialUser(user: Partial<User>) {
 }
 
 export function validateUser(user: User) {
-  const result = userSchema.safeParse(user);
-  if (result.success) {
-    return result.data;
-  } else {
-    throw new Error(result.error.toString());
-  }
+  return userSchema.safeParse(user);
 }
