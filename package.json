@@ -4,7 +4,7 @@
   "description": "API for the secret santa experience",
   "main": "server.ts",
   "scripts": {
-    "start": "nodemon src/server.ts",
+    "start": "nodemon server.ts",
     "test": "npm run tests"
   },
   "keywords": [
