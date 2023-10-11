@@ -25,12 +25,17 @@ export class UserController {
     }
   };
 
-  // async create(req: any, res: any) {
-  //   const result = validateUser(req.body);
-  //   if (!result.success) {
-  //     return res.status(400).json({ error: result.error.message });
-  //   }
-  //   const newUser = await this.userModel.create(req.body);
-  //   res.json(newUser);
-  // }
+  create = async (req: any, res: any) => {
+    try {
+      const result = validateUser(req.body);
+      if (!result.success) {
+        console.log(result.error.message)
+        return res.status(400).json({ error: result.error.message });
+      }
+      const newUser = await this.userModel.create(req.body);
+      res.json(newUser);
+    } catch (err: any) {
+      return res.status(500).json({ error: "Internal server Error" });
+    }
+  };
 }
