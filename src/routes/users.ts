@@ -9,8 +9,8 @@ export const createUserRouter = (): Router => {
   usersRouter.get("/", userController.getAll);
   usersRouter.get("/:id", userController.getById);
   usersRouter.post("/", userController.create);
-  usersRouter.delete('/:id', UserController.delete))
-  usersRouter.put('/:id', UserController.update))
+  // usersRouter.delete('/:id', UserController.delete))
+  // usersRouter.put('/:id', UserController.update))
 
   return usersRouter;
 };
